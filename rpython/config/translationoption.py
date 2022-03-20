@@ -65,12 +65,14 @@ translation_optiondescription = OptionDescription(
     # gc
     ChoiceOption("gc", "Garbage Collection Strategy",
                  ["boehm", "ref", "semispace", "statistics",
-                  "generation", "hybrid", "minimark",'incminimark', "none"],
+                  "generation", "hybrid", "minimark",'incminimark', "none", "mmtknogc"],
                   "ref", requires={
                      "ref": [("translation.rweakref", False), # XXX
                              ("translation.gctransformer", "ref")],
                      "none": [("translation.rweakref", False), # XXX
                              ("translation.gctransformer", "none")],
+                     "mmtknogc": [("translation.rweakref", False), # XXX
+                             ("translation.gctransformer", "framework")],
                      "semispace": [("translation.gctransformer", "framework")],
                      "statistics": [("translation.gctransformer", "framework")],
                      "generation": [("translation.gctransformer", "framework")],
@@ -90,6 +92,8 @@ translation_optiondescription = OptionDescription(
                      "ref": [("translation.gcrootfinder", "n/a"),
                              ("translation.gcremovetypeptr", False)],
                      "none": [("translation.gcrootfinder", "n/a"),
+                              ("translation.gcremovetypeptr", False)],
+                     "mmtknogc": [("translation.gcrootfinder", "n/a"),
                               ("translation.gcremovetypeptr", False)],
                  }),
     BoolOption("gcremovetypeptr", "Remove the typeptr from every object",
