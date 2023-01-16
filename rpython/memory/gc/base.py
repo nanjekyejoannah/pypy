@@ -583,6 +583,11 @@ def choose_gc_from_config(config):
                "hybrid": "hybrid.HybridGC",
                "minimark" : "minimark.MiniMarkGC",
                "incminimark" : "incminimark.IncrementalMiniMarkGC",
+               "mmtknogc" : "mmtknogc.MMTKNoGC",
+               "mmtksemispace": "mmtksemispace.MMTKSemiSpaceGC",
+               "mmtkgencopy": "mmtkgencopy.MMTKGenCopyGC",
+               "mmtkmarksweep": "mmtkmarksweep.MMTKMarkSweepGC",
+               "mmtkmarkcompact": "mmtkmarkcompact.MMTKMarkCompactGC",
                }
     try:
         modulename, classname = classes[config.translation.gc].split('.')

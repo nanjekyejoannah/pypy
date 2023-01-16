@@ -9,6 +9,8 @@ The recommended default is "incminimark".
 
   - "semispace": a copying semi-space GC.
 
+  - "mmtknogc": an MMTK-based GC that just allocates.
+
   - "generation": a generational GC using the semi-space GC for the
     older generation.
 

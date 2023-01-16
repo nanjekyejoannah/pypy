@@ -1013,6 +1013,50 @@ class TestSemiSpaceGC(GenericMovingGCTests):
                          'translated_to_c': False}
             root_stack_depth = 200
 
+class TestMMTKSemiSpaceGC(GenericMovingGCTests):
+    gcname = "mmtksemispace"
+    GC_CAN_SHRINK_ARRAY = True
+
+    class gcpolicy(gc.BasicFrameworkGcPolicy):
+        class transformerclass(shadowstack.ShadowStackFrameworkGCTransformer):
+            from rpython.memory.gc.mmtksemispace import MMTKSemiSpaceGC as GCClass
+            GC_PARAMS = {'space_size': 512*WORD,
+                         'translated_to_c': False}
+            root_stack_depth = 200
+
+class TestMMTKGenCopyGC(GenericMovingGCTests):
+    gcname = "mmtkgencopy"
+    GC_CAN_SHRINK_ARRAY = True
+
+    class gcpolicy(gc.BasicFrameworkGcPolicy):
+        class transformerclass(shadowstack.ShadowStackFrameworkGCTransformer):
+            from rpython.memory.gc.mmtkgencopy import MMTKGenCopyGC as GCClass
+            GC_PARAMS = {'space_size': 512*WORD,
+                         'translated_to_c': False}
+            root_stack_depth = 200
+
+class TestMMTKMarkSweepGC(GenericMovingGCTests):
+    gcname = "mmtkmarksweep"
+    GC_CAN_SHRINK_ARRAY = True
+
+    class gcpolicy(gc.BasicFrameworkGcPolicy):
+        class transformerclass(shadowstack.ShadowStackFrameworkGCTransformer):
+            from rpython.memory.gc.mmtkmarksweep import MMTKMarkSweepGC as GCClass
+            GC_PARAMS = {'space_size': 512*WORD,
+                         'translated_to_c': False}
+            root_stack_depth = 200
+
+class TestMMTKMarkCompactGC(GenericMovingGCTests):
+    gcname = "mmtkmarkcompact"
+    GC_CAN_SHRINK_ARRAY = True
+
+    class gcpolicy(gc.BasicFrameworkGcPolicy):
+        class transformerclass(shadowstack.ShadowStackFrameworkGCTransformer):
+            from rpython.memory.gc.mmtkmarkcompact import MMTKMarCompactGC as GCClass
+            GC_PARAMS = {'space_size': 512*WORD,
+                         'translated_to_c': False}
+            root_stack_depth = 200
+
 class TestGenerationGC(GenericMovingGCTests):
     gcname = "generation"
     GC_CAN_SHRINK_ARRAY = True

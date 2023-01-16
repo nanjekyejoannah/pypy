@@ -65,7 +65,9 @@ translation_optiondescription = OptionDescription(
     # gc
     ChoiceOption("gc", "Garbage Collection Strategy",
                  ["boehm", "ref", "semispace", "statistics",
-                  "generation", "hybrid", "minimark",'incminimark', "none"],
+                  "generation", "hybrid", "minimark",'incminimark',
+                  "none", "mmtknogc", "mmtksemispace", "mmtkgencopy", 
+                  "mmtkmarksweep", "mmtkmarkcompact"],
                   "ref", requires={
                      "ref": [("translation.rweakref", False), # XXX
                              ("translation.gctransformer", "ref")],
@@ -79,6 +81,11 @@ translation_optiondescription = OptionDescription(
                                ("translation.gctransformer", "boehm")],
                      "minimark": [("translation.gctransformer", "framework")],
                      "incminimark": [("translation.gctransformer", "framework")],
+                     "mmtknogc": [("translation.gctransformer", "framework")],
+                     "mmtksemispace": [("translation.gctransformer", "framework")],
+                     "mmtkgencopy": [("translation.gctransformer", "framework")],
+                     "mmtkmarksweep": [("translation.gctransformer", "framework")],
+                     "mmtkmarkcompact": [("translation.gctransformer", "framework")],
                      },
                   cmdline="--gc"),
     ChoiceOption("gctransformer", "GC transformer that is used - internal",

@@ -72,3 +72,8 @@ def test_compiled_boehm():
     fn = compile(main, [], gcpolicy="boehm")
     res = fn()
     assert res == 0
+
+def test_compiled_mmtknogc():
+    fn = compile(main, [], gcpolicy="mmtknogc")
+    res = fn()
+    assert res == 0

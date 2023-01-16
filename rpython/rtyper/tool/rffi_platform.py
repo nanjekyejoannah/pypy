@@ -881,6 +881,24 @@ def configure_boehm(platform=None):
         [dict(prefix='gc-', include_dir='include', library_dir=library_dir)],
         symbol='GC_init')
 
+def configure_mmtk():
+    incpath = "/root/mmtk-gcs/mmtk-pypy/target/"
+    rootlibpath = "/root/mmtk-gcs/mmtk-pypy/target/"
+
+    eci = ExternalCompilationInfo(
+        include_dirs=[incpath],
+        includes=["mmtk.h"],
+        library_dirs=[incpath, rootlibpath],
+        libraries=["/root/mmtk-gcs/mmtk-pypy/target/debug/libmmtk_openjdk.so"],
+        use_cpp_linker=True,
+    )
+
+    return eci
+
+def llexternal_mmtk(name, args, result, **kwds):
+    return rffi.llexternal(name, args, result, compilation_info=configure_mmtk(),
+                           releasegil=False, _nowrapper=True, **kwds)
+
 if __name__ == '__main__':
     doc = """Example:
 
